@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -euo pipefail
+name="varlang"
+libname="vllib"
+echo "[+] installing $name"
+if [[ -n "${PREFIX:-}" && "$PREFIX" == *com.termux* ]]; then
+    echo "[+] detected termux"
+    pkg install python ffmpeg
+elif command -v pacman >/dev/null 2>&1; then
+    echo "[+] detected pacman"
+    sudo pacman -S --needed python ffmpeg
+elif command -v apt-get >/dev/null 2>&1; then
+    echo "[+] detected apt-get"
+    sudo apt-get update
+    sudo apt-get -y install python3 ffmpeg
+elif command -v zypper >/dev/null 2>&1; then
+    echo "[+] detected zypper"
+    sudo zypper install python3 ffmpeg
+elif command -v apk >/dev/null 2>&1; then
+    echo "[+] detected apk"
+    sudo apk add python3 ffmpeg
+elif command -v xbps-install >/dev/null 2>&1; then
+    echo "[+] detected xbps-install"
+    sudo xbps-install -S python3 ffmpeg
+else
+    echo "[X] sorry! you have to manually install python and ffmpeg. this setup doesn't include your package manager."
+    exit 1
+fi
+if command -v python3 >/dev/null 2>&1; then
+    PYTHONBIN="python3"
+elif command -v python >/dev/null 2>&1; then
+    PYTHONBIN="python"
+else
+    echo "[X] what's going on? didn't you already installed python?"
+    exit 1
+fi
+mkdir -p "$HOME/.varlang"
+"$PYTHONBIN" "extra/pysetup.py"
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.local/lib"
+cp "extra/$name.py" "$HOME/.local/bin/$name"
+cp -r "$libname" "$HOME/.local/lib/"
+chmod +x "$HOME/.local/bin/$name"
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+fi
+echo
+echo "[+] done!"
