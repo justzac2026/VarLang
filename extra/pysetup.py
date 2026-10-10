@@ -17,11 +17,7 @@ with open(path+"/tips.pkl","wb") as f:
         "NULL",
         "so much threads",
         "use Esc in console, CTRL+C in runtime",
-        f"don't use this for exploits",
-        "jane is a nigga",
-        "jane is a black guy behind a screen",
-        "jane nigger",
-        "nigger"]
+        f"don't use this for exploits"]
     pickle.dump(data,f)
 with open(path+"/valid.txt","w") as f:
     f.write("this file proves that you did the setup")
