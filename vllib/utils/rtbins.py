@@ -17,7 +17,6 @@ class config:
         send,sugvar,tokens,arga,argb,rundata,hidedunder,stop,running,client=a,b,c,d,e,f,g,h,i,j
 def help():
     send("""help - prints help
-version - prints version
 list - lists the variables
 get - gets a variable's value
 set - modifies the value of a variable
@@ -26,8 +25,6 @@ exists - checks if variable exists
 stop - stops runtime
 call - calls a function
 tune - tests ffplay""")
-def version():
-    send("VarLang - Python Runtime Debugger v0.7.0")
 def list():
     result=[]
     for name,val in rundata.items():
