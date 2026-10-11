@@ -1,7 +1,7 @@
 import json,os,pickle
 path=os.path.expanduser("~/.varlang")
 with open(path+"/settings.json","w") as f:
-    data={"hidedunder":["hide dunders in lists",True],"tipson":["enable tips",True]}
+    data={"hidedunder":["hide dunders in lists",True],"tipson":["enable tips",True],"soundon":["enable sound",True]}
     json.dump(data,f)
 with open(path+"/tips.pkl","wb") as f:
     data=["VarLang was supposed to be a coding language",
@@ -17,7 +17,7 @@ with open(path+"/tips.pkl","wb") as f:
         "NULL",
         "so much threads",
         "use Esc in console, CTRL+C in runtime",
-        f"don't use this for exploits"]
+        "don't use this for exploits"]
     pickle.dump(data,f)
 with open(path+"/valid.txt","w") as f:
     f.write("this file proves that you did the setup")

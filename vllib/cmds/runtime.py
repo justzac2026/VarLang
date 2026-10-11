@@ -46,8 +46,7 @@ def send(msg):
 def run(filename):
     global rundata
     try:
-        code=cache(filename)
-        exec(code,rundata)
+        exec(cache(filename),rundata)
     except Exception as e:
         send(f"[X] FATAL ERROR OCCURED.\nREASON: {e}")
         play(sound="error")
