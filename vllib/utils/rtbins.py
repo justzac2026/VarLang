@@ -1,5 +1,5 @@
 import ast,os
-from ..utils.sounds import play
+from ..utils.sound import play
 SOCKET=os.path.expanduser("~/.varlang/runtime.sock")
 send=None
 sugvar=None

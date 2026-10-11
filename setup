@@ -3,10 +3,7 @@ set -euo pipefail
 name="varlang"
 libname="vllib"
 echo "[+] installing $name"
-if [[ -n "${PREFIX:-}" && "$PREFIX" == *com.termux* ]]; then
-    echo "[+] detected termux"
-    pkg install python ffmpeg
-elif command -v pacman >/dev/null 2>&1; then
+if command -v pacman >/dev/null 2>&1; then
     echo "[+] detected pacman"
     sudo pacman -S --needed python ffmpeg
 elif command -v apt-get >/dev/null 2>&1; then

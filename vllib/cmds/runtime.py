@@ -1,6 +1,7 @@
 import socket,threading,os,json,time,pickle,random,difflib,inspect,shlex
 from ..utils import rtbins
-from ..utils.sounds import play
+from ..utils.sound import play
+from ..utils.cache import cache
 CMDS={name.rstrip("_"):val for name,val in vars(rtbins).items() if not name.startswith("__") and not name.endswith("__") and inspect.isfunction(val) and name!="config"}
 SOCKET=os.path.expanduser("~/.varlang/runtime.sock")
 running=True
@@ -45,8 +46,7 @@ def send(msg):
 def run(filename):
     global rundata
     try:
-        with open(filename,"r") as f:
-            code=compile(f.read(),filename,"exec")
+        code=cache(filename)
         exec(code,rundata)
     except Exception as e:
         send(f"[X] FATAL ERROR OCCURED.\nREASON: {e}")

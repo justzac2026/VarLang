@@ -1,5 +1,5 @@
 import socket,curses,textwrap,threading,os
-from ..utils.sounds import play
+from ..utils.sound import play
 SOCKET=os.path.expanduser("~/.varlang/runtime.sock")
 tipon=False
 tips=[]
